@@ -62,6 +62,46 @@ class Edge implements Comparable<Edge> {
         return source + "-> " + destination;
     }
 }
+
+class Vertex {
+    Long id;
+    int data;
+    List<Edge> edges = new ArrayList<Edge>();
+    List<Vertex> adjacentVertices = new ArrayList<Vertex>();
+
+    public Vertex(long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getData() {
+        return data;
+    }
+
+    public void setData(int data) {
+        this.data = data;
+    }
+
+    public void adjacentVertex(Edge e,Vertex v) {
+        edges.add(e);
+        adjacentVertices.add(v);
+    }
+
+    public List<Edge> getEdges() {
+        return edges;
+    }
+
+    public List<Vertex> getAdjacentVertices() {
+        return adjacentVertices;
+    }
+}
 public class GraphVE {
     private int V;
     private int E;
