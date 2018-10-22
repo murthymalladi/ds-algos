@@ -21,6 +21,9 @@ public class PrintAllParentheses {
         countAllPossibleParentheses(n,n,"",count);
         System.out.println("count : "+ count[0]);
 
+        StringBuilder sb = new StringBuilder();
+        sb.deleteCharAt(sb.length() - 1);
+
     }
 
     /**
