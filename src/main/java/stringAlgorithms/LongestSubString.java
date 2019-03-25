@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class LongestSubString {
     public static void main(String[] args) {
         String str = "abba";
-        int max = longestSubString(str);
+        int max = longestSubStringWithoutExtraSpace(str);
         System.out.println(max);
     }
 
@@ -46,5 +46,33 @@ public class LongestSubString {
             }
         }
         return max;
+    }
+
+    public static int longestSubStringWithoutExtraSpace(String str) {
+        int start = 0;
+        HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+
+        char c;
+        int maxLength = 0;
+        int currLength = 0;
+        for (int i = 0; i < str.length(); i++) {
+            c = str.charAt(i);
+            if (map.containsKey(c)) {
+                int prevIndex = map.get(c);
+                if (i - currLength > prevIndex) {
+                    currLength++;
+                }
+                else {
+                        if (currLength > maxLength)
+                            maxLength = currLength;
+                        currLength = i - prevIndex;
+                }
+            }
+            map.put(c,i);
+        }
+        if (currLength > maxLength) {
+            maxLength = currLength;
+        }
+        return maxLength;
     }
 }
