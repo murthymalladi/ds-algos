@@ -8,8 +8,9 @@ import java.util.Arrays;
 public class LongestPalindromicSubString {
 
     public static void main(String[] args) {
-        String s = "habbadef";
-        String len = longestPalindromesubString2(s);
+        String s = "aaabaaa";
+      //  String len = longestPalindromesubString2(s);
+        int len = expandAround(s);
         System.out.println(len);
     }
 
@@ -109,5 +110,28 @@ public class LongestPalindromicSubString {
 
         }
          return s.substring(start,end+1);
+    }
+
+    public static int expandAround(String s) {
+        if (s == null || s.length() == 0)
+            return 0;
+        int n = s.length();
+        int len = Integer.MIN_VALUE;
+        for (int center = 0; center < 2*n - 1; center++) {
+            int left = center/2;
+            int right = left + center%2;
+
+            while(left >=0 && right < n && s.charAt(left) == s.charAt(right)) {
+                len = Math.max(len,right-left+1);
+                left--;
+                right++;
+
+            }
+
+
+        }
+        if (len == Integer.MIN_VALUE)
+            return 0;
+        return len;
     }
 }

@@ -6,13 +6,29 @@ package validations;
 public class ValidPalindrome {
 
     public static void main(String[] args) {
-        String str = "Aba, 121aba";
-        if (isValidPalindrome(str)) {
+        String str = "A man, a plan, a canal: Panama";
+        if (isValidPalindromeV2(str)) {
             System.out.println("valid palindrome");
         }
         else {
             System.out.println("not a valid palindrome");
         }
+    }
+
+    public static boolean isValidPalindromeV2(String str) {
+        int start = 0;
+        int end = str.length()-1;
+
+        while(start < end) {
+            while(start < end && !Character.isLetterOrDigit(str.charAt(start)))
+                start++;
+            while(end >=0 && !Character.isLetterOrDigit(str.charAt(end)))
+                end--;
+            if (start < end && Character.toLowerCase(str.charAt(start)) != Character.toLowerCase(str.charAt(end)))
+                return false;
+            start++;end--;
+        }
+        return true;
     }
 
     public static boolean isValidPalindrome(String str) {
