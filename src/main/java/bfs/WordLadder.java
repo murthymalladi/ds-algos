@@ -1,4 +1,4 @@
-//package bfs;
+package bfs;
 //
 //import java.util.*;
 //
@@ -64,3 +64,58 @@
 //        return 0;
 //    }
 //}
+
+import java.util.*;
+
+public class WordLadder {
+
+    public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
+
+        int len = 0;
+        Queue<String> queue = new LinkedList<String>();
+        queue.add(beginWord);
+        String charString = "abcdefghijklmnopqrstuvwxyz";
+        Set<String> set = new HashSet<>(wordList);
+        while(!queue.isEmpty()) {
+            len++;
+            String word = queue.peek();
+            queue.poll();
+            for (int i = 0; i < word.length(); i++) {
+                for (int j = 0; j < 26; j++) {
+
+                    String newWord = word.substring(0,i)+charString.charAt(j);
+                    if (i < word.length()-1) {
+                        newWord += word.substring(i+1);
+                    }
+
+                    if (set.contains(newWord)) {
+                        if (newWord.equals(endWord)) {
+                            return len;
+                        }
+                        else {
+                            queue.add(newWord);
+                        }
+                        set.remove(newWord);
+                    }
+                }
+
+            }
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        String beginWord = "hit";
+        String endWord = "cog";
+        List<String> wordList = new ArrayList<>();
+        wordList.add("hot");
+        wordList.add("dot");
+        wordList.add("lot");
+        wordList.add("log");
+        wordList.add("cog");
+
+        int len = ladderLength(beginWord,endWord,wordList);
+        System.out.println(len);
+    }
+
+}
